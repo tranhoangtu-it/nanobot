@@ -102,10 +102,11 @@ class TelegramChannel(BaseChannel):
         self._running = True
         
         # Configure request with proxy if enabled
-        request = HTTPXRequest()
+        request_kwargs: dict = {}
         if self.config.proxy:
             logger.info(f"Using proxy for Telegram: {self.config.proxy}")
-            request = HTTPXRequest(proxy=self.config.proxy)
+            request_kwargs["proxy"] = self.config.proxy
+        request = HTTPXRequest(**request_kwargs)
 
         # Build the application
         self._app = (
