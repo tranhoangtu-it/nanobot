@@ -103,7 +103,7 @@ class TelegramChannel(BaseChannel):
         self._running = True
         
         # Configure request with proxy if enabled
-        request = HTTPXRequest()
+        request_kwargs: dict = {}
         if self.config.proxy:
             # Redact credentials for logging
             safe_proxy = self.config.proxy
